@@ -75,7 +75,7 @@ export default function (){
 
   };
 
-  //封装移动事件：内容区ul、小箭头的移动、头部导航字体颜色的改变
+  //封装移动事件：内容区ul的top值改变、小箭头的移动、头部导航字体颜色的改变
   function move(nowIndex){
     //将所有头部导航li的class清空
     for (let i = 0; i < navLiNodes.length; i++){
@@ -89,7 +89,7 @@ export default function (){
     ulNode.style.top = - nowIndex * contentHeight + 'px';
   }
 
-  //遍历绑定事件监听
+  //遍历绑定事件监听(头部导航点击事件)
   for (let i = 0;i < navLiNodes.length; i++){
     navLiNodes[i].onclick = function(){
       //同步nowIndex的值
@@ -100,7 +100,8 @@ export default function (){
 
   //初始化让小箭头来到第一个li下面
   arrowNode.style.left = navLiNodes[0].getBoundingClientRect().left + navLiNodes[0].offsetWidth / 2 - arrowHalfWidth + 'px';
-
+  //一开始就调用一下move，让小箭头移动到第二屏的位置
+  //move(0);
   //绑定窗口缩放事件：修改小箭头位置、内容区ul位置
   window.onresize = function (){
     //修改小箭头的位置(窗口发生变化后，是由于li的left值改变造成的小箭头位置出错，这里重新获取对应li的left值，再求小箭头的位置)
