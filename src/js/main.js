@@ -1,6 +1,10 @@
 /**
  * Created by Administrator on 2018/11/23 0023.
  */
+
+//引入第一屏
+import firstView from './firstView.js';
+
 export default function (){
 
   //获取元素
@@ -33,6 +37,46 @@ export default function (){
   //li的下标
   let nowIndex = 0;
   let lastIndex = 0;
+
+  //开机动画
+  bootAnimation();
+  function bootAnimation (){
+    const bootAnimationNode = document.querySelector('#boot-animation');
+    const upNode = document.querySelector('#boot-animation .up');
+    const downNode = document.querySelector('#boot-animation .down');
+    const lineNode = document.querySelector('#boot-animation .line');
+
+    const bootArr = ['bg1.jpg','bg2.jpg','bg3.jpg','bg4.jpg','bg5.jpg','about1.jpg','about2.jpg','about3.jpg','about4.jpg','worksimg1.jpg','worksimg2.jpg','worksimg3.jpg','worksimg4.jpg','team.png','greenLine.png'];
+    const length = bootArr.length;
+    let loadedImgNum = 0;
+    //遍历数组创建图片对象
+    bootArr.forEach(item => {
+      //创建图片标签
+      const img = new Image();
+      //检测图片加载
+      img.onload = function () {
+        loadedImgNum++;
+        lineNode.style.width = ( loadedImgNum / length ) * 100 +'%';
+        //如果图片加载完成的数量等于图片总数（数组的length），图片就加载完了
+        if (loadedImgNum === length){
+          upNode.style.height = '0px';
+          downNode.style.height = '0px';
+          lineNode.style.display = 'none';
+          upNode.addEventListener('transitionend',() => {
+            //清除元素
+            bootAnimationNode.remove();
+            //第一屏入场动画
+            animationArr[0].anIn();
+            //开启自动轮播
+            firstView();
+          });
+        }
+      };
+      //设置图片src
+      img.src = `./images/${item}`;
+    })
+
+  }
 
   //出入场动画，定义成数组
   const animationArr = [
@@ -96,10 +140,10 @@ export default function (){
   for (let i = 0; i < animationArr.length; i++){
     animationArr[i].anOut();
   }
-  //默认第一屏做入场动画
+  /*//默认第一屏做入场动画
   setTimeout(() => {
     animationArr[0].anIn();
-  },2000);
+  },2000);*/
 
   /*//测
   animationArr[4].anOut();

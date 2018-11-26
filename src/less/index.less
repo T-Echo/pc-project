@@ -581,6 +581,39 @@
       }
     }
   }
+  #boot-animation{
+    .up{
+      width:100%;
+      height:50%;
+      position: absolute;
+      left:0;
+      top:0;
+      background-color: #009ee0;
+      z-index: 10;
+      transition:height 1s;
+    }
+    .down{
+      width:100%;
+      height:50%;
+      position: absolute;
+      left:0;
+      bottom:0;
+      background-color: #009ee0;
+      z-index: 10;
+      transition:height 1s;
+    }
+    .line{
+      width:100%;
+      height: 4px;
+      position: absolute;
+      left:0;
+      top:50%;
+      transform:translateY(-50%);
+      background: #fff;
+      z-index: 11;
+      transition:width 1s;
+    }
+  }
 }
 
 
