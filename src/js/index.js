@@ -11,7 +11,7 @@ import main from './main.js';
 //导入less文件
 import '../less/index.less';
 //手动引入mp3
-//import './images/audio.mp3';
+import '../images/audio.mp3';
 
 main();
 firstView();
